@@ -11,18 +11,9 @@ class TutorsController < ApplicationController
   # GET /tutors/1
   # GET /tutors/1.json
   def show
-# <<<<<<< HEAD
     set_tutor()
-    # @classes = BerkeleyClass.first.true_classes
-# =======
-#     @tutor = Tutor.find(params[:id])
     @classes = BerkeleyClass.all
     @true_classes = BerkeleyClass.first.true_classes
-    @all_classes = BerkeleyClass.first.all_classes 
-    
-# =======
-    # @classes = BerkeleyClass.first
-# >>>>>>> bebc36efbd07937a27898006278056c097d3463c
   end
 
   # GET /tutors/new
