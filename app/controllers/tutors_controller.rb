@@ -48,34 +48,10 @@ class TutorsController < ApplicationController
   # PATCH/PUT /tutors/1
   # PATCH/PUT /tutors/1.json
   def update
-    # byebug
     tutor = params[:tutor]
     email = tutor[:email]
     year = tutor[:grade_level] 
     classes = params[:classes]
-    # if validate_email(email) != 1
-    #   flash[:notice] = "Please enter a valid Berkeley email address"
-    #   redirect_to edit_tutor_path(@tutor.id)
-    # end
-
-    def validate_email (email)
-      # puts "000000000"
-      # puts email
-      # puts "000000000"
-
-      # puts "============="
-      # puts  /\A[\w+\-.]+@berkeley.edu/.match(email)
-      # puts "============="
-      /\A[\w+\-.]+@berkeley.edu/.match(email)
-    end
-
-    # puts "000000000"
-    # puts email
-    # puts "000000000"
-
-    # puts "WE ARE HERE"
-    # puts validate_email(email)
-    # puts "END"
 
     if email.blank? or year.blank? or classes.blank? or validate_email(email) == nil
       puts "EMAIL WAS BAD"
@@ -111,6 +87,10 @@ class TutorsController < ApplicationController
 
     def set_tutor
       @tutor = Tutor.find(params[:id])
+    end
+
+    def validate_email (email)
+      /\A[\w+\-.]+@berkeley.edu/.match(email)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
