@@ -11,10 +11,12 @@ class TutorsController < ApplicationController
   # GET /tutors/1
   # GET /tutors/1.json
   def show
+
     set_tutor()
     @classes = BerkeleyClass.all
     @true_classes = BerkeleyClass.first.true_classes
     @all_classes = BerkeleyClass.first.all_classes 
+
   end
 
   # GET /tutors/new
@@ -39,7 +41,16 @@ class TutorsController < ApplicationController
         respond_to do |format|
           format.html { redirect_to tutor_path(@tutor.id)}
         end
+<<<<<<< HEAD
       else
+=======
+        #format.json { render :show, status: :created, location: @tutor }
+        #redirect_to tutor_path(@tutor)
+      else
+        #flash[:notice] = "#{@tutor.first_name} #{@tutor.last_name}  was not successfully created."
+        #format.html { render :new }
+        #format.json { render json: @tutor.errors, status: :unprocessable_entity }
+>>>>>>> b0cb386f7dc74f2e32d55f55b076b4993c7c5aad
         flash[:notice] = "Tutor was not successfully created."
         redirect_to new_tutor_path
       end
@@ -87,6 +98,7 @@ class TutorsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def tutor_params
       params.require(:tutor).permit(:type_of_tutor, :grade_level, :classes_id, :email, :first_name, :last_name)
+<<<<<<< HEAD
     end
 
     def classes_params
@@ -99,6 +111,8 @@ class TutorsController < ApplicationController
         end
       end
      params.require(:classes).permit(:CS61A, :CS61B, :CS61C, :CS70, :EE16A, :CS88, :CS10, :DATA8) #maybe store this list as a constant
+=======
+>>>>>>> b0cb386f7dc74f2e32d55f55b076b4993c7c5aad
     end
 
 end

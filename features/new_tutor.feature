@@ -11,6 +11,7 @@ Feature: Create a new Tutor
       | AI           | Sophomore   | c@berkeley.edu | Gloria     | c        |
       | 10 hour TA   | Junior      | d@berkeley.edu | AJ         | d        |
 
+
     Given the following berkeley_classes exist:
       |CS61A | CS61B | CS61C | CS70  | EE16A | CS88  | CS10  | DATA8 |
       |true  | false | false | false | false | false | false | false |
