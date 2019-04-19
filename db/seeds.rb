@@ -28,9 +28,10 @@ def seed_tutor
     Tutor.create(
     	type_of_tutor: "CSM",
       	grade_level: "Senior",
-   		email: "test@email.edu", 
+   		email: "test@berkeley.edu", 
       	first_name: "Alvin",
-      	last_name: "Nguyen"
+      	last_name: "Nguyen",
+
     )
 	end
 end
@@ -53,5 +54,9 @@ end
 seed_berkeley_classes
 seed_tutor
 
+BERKELEY_CLASSES = BerkeleyClass.all 
+TUTORS = Tutor.all 
 
-
+BERKELEY_CLASSES.each_with_index do |item, index|
+  TUTORS[index].update_column(:berkeley_classes_id, item.id)
+end

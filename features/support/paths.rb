@@ -24,11 +24,14 @@ module NavigationHelpers
     when /"(.*)'s" tutee page$/
       tutee_path(Tutee.find_by_first_name($1))
 
-
     when /^the home\s?page$/
       '/'
 
+    when /tutor signup page/
+      new_tutor_path
 
+    when /tutor index page/
+      tutors_path
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
