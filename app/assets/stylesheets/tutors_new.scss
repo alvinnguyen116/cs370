@@ -62,9 +62,11 @@ body{
 
 .horiz-form {
   width: 100%;
-
+  
   > *,
   .bc-container {
+=======
+  > * {
   width: fit-content;
   float: left;
   }
