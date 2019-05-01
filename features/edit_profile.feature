@@ -6,7 +6,15 @@ Feature: Edit tutor profile
 
 	Background: populate database with tutor
 
+<<<<<<< HEAD
+		Given the following tutors exist:
+		| type_of_tutor| grade_level | email		 | first_name | last_name |
+	    | AI   		   | Senior      | test@berkeley.edu | testyBoi   | lastName  |
+
+	    Given the following berkeley_classes exist:
+=======
 		Given the following berkeley_classes exist:
+>>>>>>> ab92550e5e11203502594f4d15c29e36c551645a
 	    |CS61A | CS61B | CS61C | CS70  | EE16A | CS88  | CS10  | DATA8 |
 	    |true  | true | false | false | false | false | false | false |
 
@@ -47,7 +55,10 @@ Feature: Edit tutor profile
 
 	Scenario: tutor can not update email if provided email is invalid
 		Given I am on the home page
+<<<<<<< HEAD
+=======
 		And I go to "tutor index page"
+>>>>>>> ab92550e5e11203502594f4d15c29e36c551645a
 		And I follow "Edit"
 		When I fill in "Email" with "not valid email"
 		And I press "Submit"

@@ -25,6 +25,17 @@ class TutorsController < ApplicationController
   # POST /tutors
   # POST /tutors.json
   def create
+
+    tutorDouble = double("tutor")
+    allow(tutorDouble).to recieve(:email).and_return("ah91086@berkeley.edu")
+
+    tuteeDouble = double("tutee")
+    allow(tuteeDouble).to recieve(:email).and_return("ah91086@berkeley.edu")
+
+
+    TutorMailer.with(tutor: tutorDouble, tutee: tuteeDouble).invite_student.deliver_now
+
+
     @tutor = Tutor.new(tutor_params)
     if params[:classes].blank?
       flash[:notice] = "You must select at least one class."
@@ -83,6 +94,10 @@ class TutorsController < ApplicationController
     end
   end
 
+  def requests
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     VALID_EMAIL_REGEX = /A[\w+\-.]+@berkeley.edu/
@@ -92,6 +107,10 @@ class TutorsController < ApplicationController
       @all_classes = BerkeleyClass.all_classes 
       @class_obj = BerkeleyClass.find(@tutor.berkeley_classes_id)
       @true_classes = @class_obj.true_classes
+    end
+
+    def validate_email (email)
+      /\A[\w+\-.]+@berkeley.edu/.match(email)
     end
 
     def validate_email (email)
