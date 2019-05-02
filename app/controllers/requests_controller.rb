@@ -58,12 +58,15 @@ class RequestsController < ApplicationController
   end
   def destroy
   end
-
+    # t.bigint "tutor_id"
+    # t.bigint "request_id"
+    
   def email
     tid = params[:tutor_id]
     sid = params[:student][:id]
     requestid = params[:student][:requestid]
     tutor_message = params[:tutor][:text_area]
+    Meeting.create!({:tutor_id => tid, :request_id => requestid});
     TutorMailer.invite_student(tid, sid, tutor_message, requestid).deliver_now
     redirect_to tutor_requests_path(tid)
   end
