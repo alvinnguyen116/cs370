@@ -1,64 +1,40 @@
 
+<%= stylesheet_link_tag "tutor_request" %>
+<script src='https://cloud.tinymce.com/5/tinymce.min.js?apiKey=qoelxh4j0znn7hzz2ucbj8swdj5aur7zuzq8t1l0tml3v35j'></script>
+<%= javascript_include_tag "email" %>
 <script>
-	function showEmailForm(email) {
-		// document.getElementById("email-form").style.
-		console.log('params email', email);
-		$("#student-email").val(email);
-		$("#email-form").css({'opacity' : 1, 'z-index':1});
-	}
-	
-	function hideEmailForm() {
-		console.log('student email', $("#student-email").val());
-		
-		$("#email-form").css({'opacity' : 0, 'z-index':0});
-	}
+  $(document).ready(()=>{
+     tinymce.init({
+      selector: 'textarea#classic',  // change this value according to the HTML
+      height: 500,
+      plugins: [
+          'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
+          'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+          'save table contextmenu directionality emoticons template paste textcolor'
+        ],
+      toolbar: 'undo redo | styleselect | bold italic | link image'
+    });
+  });
 </script>
 
-<form id="email-form" action="" method="" 
-style="
-opacity: 0;
-position: absolute;
-top: 0;
-left: 0;
-width: 100vw;
-height: 100vh;
-background: #00000040;
-z-index: 0;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-transition: opacity .1s linear;
-">
-<div style="
-	display: flex;
-    flex-direction: column;
-    width: 50%;
-    "
->
-	<h1 style="
-	    background: white;
-    font-size: 16px;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    padding: 3px 30px;
-	">Email Body</h1>
-	<input id="student-email" type="hidden" value="">
-	<input type="textarea" style="
-    height: 200px;
-	">
-	<input class="btn btn-primary" type="submit" value="send" onclick="hideEmailForm()" style="
-	margin-top: 10px;
-	">
-</div>
+<% if notice %>
+  <%= render "notice_danger" %>
+<% end %>
+
+<form id="email-form" action=<%= requests_email_tutor_path(@tutor) %> method="get">
+    <div>
+        <h1 id="to-email"></h1>
+        <input id="student-id" name="student[id]" type="hidden" value="">
+        <input id="student-email" name="student[email]" type="hidden" value="">
+        <input id="request-id" name="student[requestid]" type="hidden" value="">
+        <textarea name="tutor[text_area]" class="email-body" id="classic"></textarea>
+        <input class="btn btn-primary m-top-10" type="submit" value="send" onclick="hideEmailForm()">
+    </div>
 </form>
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-            <% if notice %>
-                <%= render "notice_danger" %>
-            <% end %>
         </div>
         <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
             <h1 class="text-center">Students on the Queue</h1>
@@ -103,7 +79,7 @@ transition: opacity .1s linear;
                                                     <li class="list-group-item <%if tutee.privilege != 'No'%> background-success<% end %>">
                                                         <p> <%= tutee.first_name + ' ' + tutee.last_name%> </p>
                                                         <p> <%= req.subject%> </p>
-                                                        <p> <button class="btn btn-primary" onclick="showEmailForm('<%= tutee.email %>')">Email</button> </p>         
+                                                        <p> <button class="btn btn-primary" onclick="showEmailForm(['<%=Tutee.find(req.tutee_id).email%>', '<%=req.tutee_id%>', '<%=req.id %>' ])">Email</button></p>         
                                                     </li>
                                                 </ul>
                                             </div>
