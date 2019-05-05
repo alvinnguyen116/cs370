@@ -6,9 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-tutees = [{:sid => 123456789, :first_name => "Bob", :last_name => "Burgers", :email => "ah91086@berkeley.edu", :birthdate => "1992-01-01", :privilege => 'No', :gender => 'male',
+tutees = [{:sid => 123456789, :first_name => "Bob", :last_name => "Burgers", :email => "alvinnguyen@berkeley.edu", :birthdate => "1992-01-01", :privilege => 'No', :gender => 'male',
           :ethnicity => 'Asian', :dsp => 'Yes', :transfer => 'Yes', :year => '4+', :pronoun => 'he/his', :major => 'EECS'}]
-tutee_cs_scholar = {:sid => 123456789, :first_name => "Peter", :last_name => "Griffin", :email => "bobs@berkeley.edu", :birthdate => "1992-01-01", :privilege => 'cs61a', :gender => 'male',
+tutee_cs_scholar = {:sid => 123456789, :first_name => "Peter", :last_name => "Griffin", :email => "alvinnguyen@berkeley.edu", :birthdate => "1992-01-01", :privilege => 'cs61a', :gender => 'male',
           :ethnicity => 'Asian', :dsp => 'Yes', :transfer => 'Yes', :year => '4+', :pronoun => 'he/his', :major => 'EECS'}
 tutee_not_cs_scholar = {:sid => 123456789, :first_name => "Naruto", :last_name => "Uzumaki", :email => "bobs@berkeley.edu", :birthdate => Time.now, :privilege => 'No', :gender => 'male',
           :ethnicity => 'Asian', :dsp => 'Yes', :transfer => 'Yes', :year => '4+', :pronoun => 'he/his', :major => 'EECS'}
