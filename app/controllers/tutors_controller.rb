@@ -8,7 +8,6 @@ class TutorsController < ApplicationController
   end
 
   def find_students
-    @tutees = Tutee.all
   end
 
   # GET /tutors/1
