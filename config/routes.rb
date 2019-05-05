@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/tutees/all/' => 'tutees#all', as: :tutee_all
   get '/tutors/:tutor_id/requests/email/' => 'requests#email', as: :requests_email_tutor
 
+
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html  
 
