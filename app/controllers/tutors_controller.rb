@@ -1,3 +1,4 @@
+require 'date'
 class TutorsController < ApplicationController
   before_action :set_tutor, only: [:show, :edit, :update, :destroy, :find_students]
 
@@ -28,6 +29,17 @@ class TutorsController < ApplicationController
   # POST /tutors
   # POST /tutors.json
   def create
+
+    tutorDouble = double("tutor")
+    allow(tutorDouble).to recieve(:email).and_return("ah91086@berkeley.edu")
+
+    tuteeDouble = double("tutee")
+    allow(tuteeDouble).to recieve(:email).and_return("ah91086@berkeley.edu")
+
+
+    TutorMailer.with(tutor: tutorDouble, tutee: tuteeDouble).invite_student.deliver_now
+
+
     @tutor = Tutor.new(tutor_params)
     if params[:classes].blank?
       flash[:notice] = "You must select at least one class."
@@ -48,7 +60,30 @@ class TutorsController < ApplicationController
         flash[:notice] = "Tutor was not successfully created."
         redirect_to new_tutor_path
       end
-    end
+  end
+
+  def total_hours
+    @tutor= Tutor.find(params[:id])
+    return Tutor.total_hours_helper(@tutor)
+  end
+  helper_method :total_hours
+
+
+  def hours_this_week
+    @tutor= Tutor.find(params[:id])
+    return Tutor.hours_this_week_helper(@tutor)
+  end
+  helper_method :hours_this_week
+
+  def average_hours
+    @tutor= Tutor.find(params[:id])
+
+
+    return Tutor.average_hours_helper(@tutor)
+
+
+  end
+  helper_method :average_hours
 
   # PATCH/PUT /tutors/1
   # PATCH/PUT /tutors/1.json
@@ -86,6 +121,10 @@ class TutorsController < ApplicationController
     end
   end
 
+  def requests
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     VALID_EMAIL_REGEX = /A[\w+\-.]+@berkeley.edu/
@@ -100,6 +139,10 @@ class TutorsController < ApplicationController
       @all_classes = BerkeleyClass.all_classes 
       @class_obj = BerkeleyClass.find(@tutor.berkeley_classes_id)
       @true_classes = @class_obj.true_classes
+    end
+
+    def validate_email (email)
+      /\A[\w+\-.]+@berkeley.edu/.match(email)
     end
 
     def validate_email (email)
