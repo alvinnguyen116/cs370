@@ -56,4 +56,19 @@ RSpec.describe RequestsController, type: :controller do
       get :email, params: {:tutor_id => 1, :student => { :id => Tutee.all.first.id, :requestid => 1 }, :tutor => {:text_area => "hi"}}
     end
   end
+
+  describe "Request" do
+
+    before :each do
+      @tutee = create(:tutee)
+      @tutor = create(:tutor)
+      @m = create(:request) #@request is protected word for Cookies 
+    end
+
+    it "sent email" do 
+      expect(ActionMailer::Base.deliveries.length).to eq(1)
+    end 
+
+  end
+
 end
