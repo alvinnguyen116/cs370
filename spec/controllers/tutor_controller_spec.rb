@@ -30,7 +30,7 @@ describe TutorsController do
     end
 
     it 'average over 1 evaluation' do
-      @tutor1 = FactoryBot.create(:tutor, :id => 50)
+      @tutor1 = FactoryBot.create(:tutor, :id => 0)
       expect(Tutor.average_hours_helper(@tutor1)).to eq(5.0)
     end
   end
